@@ -23,9 +23,9 @@ const Boton = styled.input`
   }
 `
 
-const Formulario = () => {
+const Formulario = ({guardarMoneda, guardarCriptomoneda}) => {
 
-  const [listacripto, guardarCriptomoneda] = useState([])
+  const [listacripto, guardarCriptomonedas] = useState([])
 
   const [error, guardarError] = useState(false)
 
@@ -48,7 +48,7 @@ const Formulario = () => {
       const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD'
       const resultado = await axios.get(url)
 
-      guardarCriptomoneda(resultado.data.Data)
+      guardarCriptomonedas(resultado.data.Data)
     }
 
     consultarAPI()
@@ -66,6 +66,8 @@ const Formulario = () => {
 
     //pasar los datos al componente principal
     guardarError(false)
+    guardarMoneda(moneda)
+    guardarCriptomoneda(criptomoneda)
   }
 
   return(
